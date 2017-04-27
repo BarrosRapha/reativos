@@ -1,0 +1,49 @@
+/* Raphael Rosa de Barros */
+
+#define LED 13
+#include "xtea.c.h"
+
+int i;
+void setup () {
+    pinMode(LED, OUTPUT);
+    Serial.begin(9600);
+   }
+ 
+uint32_t key[] = { 1, 2, 3, 4 };
+uint32_t v[]   = { 10, 20, 30, 40, 50, 60 };
+
+
+void loop () {
+  
+     static int led = 0;
+     digitalWrite(LED, led=!led);
+    
+
+    unsigned long t1 = millis();
+    i=0;
+    while(i<=4){
+     
+        Serial.print("antes: ");
+        Serial.print(v[i]);
+        Serial.print(" ");
+        Serial.println(v[i+1]);
+
+    encipher(32, &v[i], key);
+
+    Serial.print("durante: ");
+        Serial.print(v[i]);
+        Serial.print(" ");
+        Serial.println(v[i+1]);
+
+    decipher(32, &v[i], key);
+
+    Serial.print("depois: ");
+        Serial.print(v[i]);
+        Serial.print(" ");
+        Serial.println(v[i+1]);
+        i+=2; 
+    }
+
+    unsigned long t2 = millis();
+    Serial.println(t2-t1);
+}
