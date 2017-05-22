@@ -20,8 +20,6 @@ void setup() {
 
  // deixa pino em LOW
  digitalWrite(gatilho,LOW);
-
- delayMicroseconds(10);
  
  // configura pino ECHO como entrada
  pinMode(echo,INPUT);
@@ -59,7 +57,7 @@ void loop() {
    }
     
    if(on){
-       tempo_ligado = (millis() - start)/1000;  
+       tempo_ligado = trunc((millis() - start)/1000);  
    }else{
       tempo_ligado = 0;
    }
@@ -78,5 +76,4 @@ void loop() {
     }
     
    delay(1000);
-   delayMicroseconds(200);
 }
